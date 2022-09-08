@@ -13,6 +13,8 @@ function App() {
   const [choosedItem,setChoosedItem] = useState(null);
 
   useEffect(()=>{
+
+    // not working in same window, working only when 2+ window on same domain
     function storageUpdates(){
       console.log('storage triggered')
       const data = localStorage.getItem('items');
@@ -48,7 +50,7 @@ function App() {
       <div className="mainTable">
         <div className='list'>
           {LSitems.map(certificate=>{
-            return <li key={certificate.issuerCN} onClick={event=>setChoosedItem(certificate)} className="itemList">{certificate.issuerCN}</li>
+            return <li key={certificate.issuerCN} onClick={event=>setChoosedItem(certificate)} className={`itemList ${choosedItem == certificate ? 'active' : ""}`}>{certificate.issuerCN}</li>
           })}
         </div>
         <div className='infoArea'>  
